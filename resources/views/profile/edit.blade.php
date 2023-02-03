@@ -7,12 +7,12 @@
                     <div class="cover">
                         <div class="gray-shade"></div>
                         <figure>
-                            <img src="https://via.placeholder.com/1148x272" class="img-fluid" alt="profile cover">
+                            <img src="{{ asset('upload/admin_cover_image') }}/{{ auth()->user()->cover_photo }}" class="img-fluid"  alt="profile cover">
                         </figure>
                         <div class="cover-body d-flex justify-content-between align-items-center">
                             <div>
-                                <img class="profile-pic" src="https://via.placeholder.com/100x100" alt="profile">
-                                <span class="profile-name">Amiah Burton</span>
+                                <img class="profile-pic" src="{{ asset('upload/admin_profile_image') }}/{{ auth()->user()->profile_image }}" alt="profile">
+                                <span class="profile-name">{{ Auth::user()->name }}</span>
                             </div>
 
                         </div>
@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">profile Update Form</h6>
-                        <form class="forms-sample" action="{{ route('profile.update',["id"=>auth()->id()]) }}"  method="POST" >
+                        <form class="forms-sample" action="{{ route('profile.update',["id"=>auth()->id()]) }}"  method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group row">
                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
@@ -53,16 +53,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="exampleInputMobile" class="col-sm-3 col-form-label">Address</label>
+                                <label for="exampleInputadd" class="col-sm-3 col-form-label">Address</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile"
+                                    <input type="text" class="form-control" id="exampleInputadd"
                                         placeholder="Address" name="address" value="{{ Auth::user()->address }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="exampleInputMobile" class="col-sm-3 col-form-label">Gender</label>
-                                <div class="col-sm-9">
-                                    <select name="gender" id="" >
+                                <label  class="col-sm-3 col-form-label">Gender</label>
+                                <div class="col-sm-9" >
+                                    <select name="gender" id="">
                                         <option value="male" @selected(auth()->user()->gender == 'male')>Male</option>
                                         <option value="female" @selected(auth()->user()->gender == 'female')>Female</option>
                                         <option value="other" @selected(auth()->user()->gender == 'other')>Other</option>
@@ -70,22 +70,66 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="exampleInputMobile" class="col-sm-3 col-form-label">Profile Image</label>
+                                <label for="exampleInputprofile" class="col-sm-3 col-form-label">Profile Image</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" id="exampleInputMobile" name="profile_image">
+                                    <input type="file" class="form-control" id="exampleInputprofile" name="profile_image">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="exampleInputMobile" class="col-sm-3 col-form-label">Cover Photo</label>
+                                <label for="exampleInputcover" class="col-sm-3 col-form-label">Cover Photo</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" id="exampleInputMobile" name="cover_photo">
+                                    <input type="file" class="form-control" id="exampleInputcover" name="cover_photo">
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
 
                         </form>
+
                     </div>
+
+                </div>
+            </div>
+           <!--profile password update form-->
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Profile Passwod Update Form</h6>
+                        <form class="forms-sample" action="{{ route('profile.password.update',["id"=>auth()->id()]) }}"  method="POST" >
+                        @csrf
+                            <div class="form-group row">
+                                <label for="old" class="col-sm-3 col-form-label">Old Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password"  class="form-control" id="old"
+                                         name="old_password" placeholder="old Password">
+                                         @if (session('error'))
+                                                <div class="alert alert-success" role="alert">
+                                                  <p class="text-danger">{{ session('error') }}</p>
+                                                </div>
+                                         @endif
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="New" class="col-sm-3 col-form-label">New Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="New"
+                                        placeholder="New Password" name="new_password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Confirm" class="col-sm-3 col-form-label">Confirm Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="Confirm"
+                                        placeholder="Confirm Password" name="confirm_password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+
+                        </form>
+
+                    </div>
+
                 </div>
             </div>
         </div>
