@@ -51,10 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('tag',TagController::class);
     //resource post route
     Route::resource('posts',PostController::class);
-
-
     Route::post('/admin/post/subCategoryList',[PostController::class,'getSubCategoryList']);
-
+    Route::delete('/admin/post/delete/{id}',[PostController::class,'delete'])->name('post.delete');
 
 });
 

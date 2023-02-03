@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="parent_category">Parent Category</label>
                 <select name="post_category" id="parent_category">
-                    <option value="0">Select Parent Category</option>
+                    <option value="">Select Parent Category</option>
                     @foreach ($parent_category as $category)
                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                     @endforeach
